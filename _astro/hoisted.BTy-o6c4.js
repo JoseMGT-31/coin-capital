@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",()=>{function s(){return r("loggedInUser")}function r(a){const t=sessionStorage.getItem(a);return t?JSON.parse(t):null}const e=s(),n=e?e.username:"Username no disponible";console.log(n);const o=document.getElementById("user-card");o?o.textContent=`${n}`:console.error("Elemento con ID 'user-username' no encontrado")});
