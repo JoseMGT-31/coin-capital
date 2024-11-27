@@ -7,5 +7,5 @@ export default defineConfig({
   output: 'static',
   integrations: [tailwind()],
   site: 'https://JoseMGT-31.github.io',
-  base: '/coin-capital',
+  base: 'coin-capital',
 });
