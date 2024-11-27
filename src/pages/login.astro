@@ -6,15 +6,6 @@ import Layout from "../layouts/Layout.astro";
 <script>
 
     document.addEventListener("DOMContentLoaded", () => {
-        const users = [
-            {email: "analista@gmail.com", username: "Jorge", password: "1234", role: "analista"},
-            {email: "trader@gmail.com", username: "Ray", password: "1234", role: "trader"},
-            {email: "soporte@gmail.com", username: "Alberto", password: "1234", role: "soporte"},
-        ];
-
-        sessionStorage.setItem("loggedInUser", JSON.stringify(users));
-        localStorage.setItem("users", JSON.stringify(users));
-
         const form = document.querySelector("#session");
 
         if (form) {

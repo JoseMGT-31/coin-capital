@@ -4,13 +4,29 @@ import Recaptcha from "../components/Recaptcha.astro"
 ---
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const form = document.querySelector("#register-form");
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("#register-form");
 
-        if (form) {
-            form.addEventListener("submit", registerUser);
+    // Inicialización de usuarios predeterminados
+    function initializeDefaultUsers() {
+        const defaultUsers = [
+            { email: "analista@gmail.com", username: "Jorge", password: "1234", role: "analista" },
+            { email: "trader@gmail.com", username: "Ray", password: "1234", role: "trader" },
+            { email: "soporte@gmail.com", username: "Alberto", password: "1234", role: "soporte" },
+        ];
+
+        const storedUsers = localStorage.getItem("users");
+        if (!storedUsers) {
+            // Solo guardar si no existen usuarios en localStorage
+            localStorage.setItem("users", JSON.stringify(defaultUsers));
         }
-    });
+    }
+
+    initializeDefaultUsers(); // Llamar al inicio para configurar usuarios predeterminados
+
+    if (form) {
+        form.addEventListener("submit", registerUser);
+    }
 
     function getUsers() {
         return JSON.parse(localStorage.getItem("users")) || [];
@@ -22,8 +38,7 @@ import Recaptcha from "../components/Recaptcha.astro"
         localStorage.setItem("users", JSON.stringify(users));
     }
 
-
-    function registerUser(event: Event) {
+    function registerUser(event) {
         event.preventDefault();
         const email = (document.getElementById("email") as HTMLInputElement).value;
         const username = (document.getElementById("username") as HTMLInputElement).value;
@@ -65,13 +80,15 @@ import Recaptcha from "../components/Recaptcha.astro"
         alert("Usuario registrado exitosamente. Ahora puedes iniciar sesión.");
         window.location.href = "/login";
     }
+});
+
 </script>
 
 <Layout title="Registro">
     <section>
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                <img src="/src/images/logo_ofc.png" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+                <img src="https://cdn.discordapp.com/attachments/1145833321042030663/1311147736204185703/logo_ofc.png?ex=6747ccfc&is=67467b7c&hm=3ce6b0e7258bdbe34bb86128e35f9537411e8f884659740ddc473131bff85bed&" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
                 <span class="self-center text-xl font-bold whitespace-nowrap dark:text-white">Coin Capital</span>
             </a>
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
