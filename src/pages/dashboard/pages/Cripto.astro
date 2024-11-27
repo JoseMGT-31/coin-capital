@@ -1,0 +1,231 @@
+---
+import CriptoDash from "../../../components/dashboard/CriptoDash.astro";
+
+const cryptos = [
+  {
+    id: "bitcoin-unique-1-dropdown",
+    name: "Bitcoin",
+    symbol: "BTC",
+    network: "Bitcoin Network",
+    value: "$45,000"
+  },
+  {
+    id: "ethereum-unique-2-dropdown",
+    name: "Ethereum",
+    symbol: "ETH",
+    network: "Ethereum Mainnet",
+    value: "$3,200"
+  },
+  {
+    id: "cardano-unique-3-dropdown",
+    name: "Cardano",
+    symbol: "ADA",
+    network: "Cardano Blockchain",
+    value: "$1.55"
+  },
+  {
+    id: "solana-unique-4-dropdown",
+    name: "Solana",
+    symbol: "SOL",
+    network: "Solana Blockchain",
+    value: "$150"
+  },
+  {
+    id: "ripple-unique-5-dropdown",
+    name: "Ripple",
+    symbol: "XRP",
+    network: "RippleNet",
+    value: "$1.20"
+  },
+  {
+    id: "polkadot-unique-8-dropdown",
+    name: "Polkadot",
+    symbol: "DOT",
+    network: "Polkadot Network",
+    value: "$35"
+  },
+  {
+    id: "chainlink-unique-9-dropdown",
+    name: "Chainlink",
+    symbol: "LINK",
+    network: "Ethereum Network",
+    value: "$25"
+  }
+];
+
+const cryptosF = [
+  {
+    id: "dogecoin-unique-6-dropdown",
+    name: "Dogecoin",
+    symbol: "DOGE",
+    network: "Dogecoin Network",
+    value: "$0.25"
+  },
+  {
+    id: "litecoin-unique-7-dropdown",
+    name: "Litecoin",
+    symbol: "LTC",
+    network: "Litecoin Network",
+    value: "$150"
+  },
+  {
+    id: "binancecoin-unique-10-dropdown",
+    name: "Binance Coin",
+    symbol: "BNB",
+    network: "Binance Smart Chain",
+    value: "$400"
+  },
+  {
+    id: "uniswap-unique-11-dropdown",
+    name: "Uniswap",
+    symbol: "UNI",
+    network: "Ethereum Network",
+    value: "$30"
+  },
+  // Repitiendo algunas criptos de cryptos con nuevos IDs
+  {
+    id: "bitcoin-unique-12-dropdown",
+    name: "Bitcoin",
+    symbol: "BTC",
+    network: "Bitcoin Network",
+    value: "$45,000"
+  },
+  {
+    id: "ethereum-unique-13-dropdown",
+    name: "Ethereum",
+    symbol: "ETH",
+    network: "Ethereum Mainnet",
+    value: "$3,200"
+  }
+];
+
+
+
+
+---
+
+
+<section class="bg-white py-8 antialiased dark:bg-gray-800 md:py-16 dark:border md:mt-0 dark:border-gray-700 rounded-lg">
+        <main class="w-full h-screen">
+            <div class="tradingview-widget-container w-3/4 h-3/4 mx-auto">
+                <div class="tradingview-widget-container__widget w-full h-full"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                    "autosize";true,
+                    "symbol"; "MARKETSCOM:BITCOIN",
+                    "interval"; "30",
+                    "timezone"; "Etc/UTC",
+                    "theme"; "dark",
+                    "style"; "1",
+                    "locale"; "es",
+                    "backgroundColor"; "rgba(0, 0, 0, 1)",
+                    "gridColor"; "rgba(255, 0, 255, 0.06)",
+                    "allow_symbol_change"; true,
+                    "calendar";false,
+                    "support_host"; "https://www.tradingview.com"
+                }
+                </script>
+            </div>
+        </main>
+
+        <div class="grid grid-cols-2">
+            <div class="h-auto flex flex-col items-center justify-center w-full p-5"> 
+                <h2 class="text-sm font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                    Precios de criptomonedas
+                </h2>
+                <section class="p-3 sm:p-5">
+                    <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+                        <!-- Start coding here -->
+                        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                        <tr>
+                                            <th scope="col" class="px-4 py-3">Criptomoneda</th>
+                                            <th scope="col" class="px-4 py-3">Red</th>
+                                            <th scope="col" class="px-4 py-3">Valor</th>
+                                            <th scope="col" class="px-4 py-3">
+                                                <span class="sr-only">Actions</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {cryptos.map ((data =>
+                                            <tr class="border-b dark:border-gray-700">
+                                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{data.name}</th>
+                                            <td class="px-4 py-3">{data.network}</td>
+                                            <td class="px-4 py-3">{data.value}</td>
+                                            <td class="px-4 py-3 flex items-center justify-end">
+                                                <button  id=`${data.id}-dropdown-button` data-dropdown-toggle=`${data.id}-dropdown` class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                    </svg>
+                                                </button>
+                                                <div id=`${data.id}-dropdown` class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                    <div class="py-1">
+                                                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Agregar a favoritas</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+    
+            
+
+
+            <div class="h-auto flex flex-col items-center justify-center w-full p-5"> 
+                <h2 class="text-sm font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                    Criptomonedas favoritas
+                </h2>
+                <section class="p-3 sm:p-5">
+                    <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+                        <!-- Start coding here -->
+                        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                        <tr>
+                                            <th scope="col" class="px-4 py-3">Criptomoneda</th>
+                                            <th scope="col" class="px-4 py-3">Red</th>
+                                            <th scope="col" class="px-4 py-3">Valor</th>
+                                            <th scope="col" class="px-4 py-3">
+                                                <span class="sr-only">Actions</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {cryptosF.map ((data =>
+                                            <tr class="border-b dark:border-gray-700">
+                                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{data.name}</th>
+                                            <td class="px-4 py-3">{data.network}</td>
+                                            <td class="px-4 py-3">{data.value}</td>
+                                            <td class="px-4 py-3 flex items-center justify-end">
+                                                <button  id=`${data.id}-dropdown-button` data-dropdown-toggle=`${data.id}-dropdown` class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                    </svg>
+                                                </button>
+                                                <div id=`${data.id}-dropdown` class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                    <div class="py-1">
+                                                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Eliminar</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+</section>

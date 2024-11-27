@@ -1,0 +1,191 @@
+---
+import TransaccionesCard from "../../../components/dashboard/TransaccionesCard.astro";
+
+const transactions = [
+  // Inversiones
+  {
+    id: '#FWB127364396',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '21/10/2021',
+    titleS: 'Estado',
+    state: 'En curso',
+    statusColor: 'yellow',
+    amount: '$1000',
+  },
+  {
+    id: '#FWB127364397',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '22/10/2021',
+    titleS: 'Estado',
+    state: 'Completado',
+    statusColor: 'green',
+    amount: '$1500',
+  },
+  {
+    id: '#FWB127364398',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '23/10/2021',
+    titleS: 'Estado',
+    state: 'Completado',
+    statusColor: 'green',
+    amount: '$2000',
+  },
+  {
+    id: '#FWB127364399',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '25/10/2021',
+    titleS: 'Estado',
+    state: 'Completado',
+    statusColor: 'green',
+    amount: '$800',
+  },
+  {
+    id: '#FWB127364400',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '26/10/2021',
+    titleS: 'Estado',
+    state: 'En curso',
+    statusColor: 'yellow',
+    amount: '$950',
+  },
+  // Nuevas transacciones
+  {
+    id: '#FWB127364401',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '27/10/2021',
+    titleS: 'Estado',
+    state: 'Completado',
+    statusColor: 'green',
+    amount: '$500',
+  },
+  {
+    id: '#FWB127364402',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '28/10/2021',
+    titleS: 'Estado',
+    state: 'En curso',
+    statusColor: 'yellow',
+    amount: '$3000',
+  },
+  {
+    id: '#FWB127364403',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '29/10/2021',
+    titleS: 'Estado',
+    state: 'Cancelado',
+    statusColor: 'red',
+    amount: '$1200',
+  },
+  {
+    id: '#FWB127364404',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '30/10/2021',
+    titleS: 'Estado',
+    state: 'Completado',
+    statusColor: 'green',
+    amount: '$1800',
+  },
+  {
+    id: '#FWB127364405',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '31/10/2021',
+    titleS: 'Estado',
+    state: 'En curso',
+    statusColor: 'yellow',
+    amount: '$2750',
+  },
+  // Más transacciones
+  {
+    id: '#FWB127364406',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '01/11/2021',
+    titleS: 'Estado',
+    state: 'Completado',
+    statusColor: 'green',
+    amount: '$3200',
+  },
+  {
+    id: '#FWB127364407',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '02/11/2021',
+    titleS: 'Estado',
+    state: 'Cancelado',
+    statusColor: 'red',
+    amount: '$950',
+  },
+  {
+    id: '#FWB127364408',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '03/11/2021',
+    titleS: 'Estado',
+    state: 'Completado',
+    statusColor: 'green',
+    amount: '$2100',
+  },
+  {
+    id: '#FWB127364409',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '04/11/2021',
+    titleS: 'Estado',
+    state: 'En curso',
+    statusColor: 'yellow',
+    amount: '$600',
+  },
+  {
+    id: '#FWB127364410',
+    title: 'Tipo de transacción',
+    type: 'Inversión',
+    titleD: 'Fecha de transacción',
+    date: '05/11/2021',
+    titleS: 'Estado',
+    state: 'Completado',
+    statusColor: 'green',
+    amount: '$8000',
+  },
+];
+
+---
+
+<section class="bg-white py-8 antialiased dark:bg-gray-800 md:py-16 dark:border md:mt-0 dark:border-gray-700 rounded-lg">
+    <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+        <div class="mx-auto max-w-5xl">
+            <div class="gap-4 sm:flex sm:items-center sm:justify-between">
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Historial de Inversiones</h2>
+            </div>
+
+                {transactions.map ((data => 
+                    <TransaccionesCard {...data} />
+                ))}
+
+            </div>
+        </div>
+    </div>
+</section>

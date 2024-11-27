@@ -1,0 +1,122 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Recaptcha from "../components/Recaptcha.astro"
+---
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("#register-form");
+
+        if (form) {
+            form.addEventListener("submit", registerUser);
+        }
+    });
+
+    function getUsers() {
+        return JSON.parse(localStorage.getItem("users")) || [];
+    }
+
+    function saveUser(user) {
+        const users = getUsers();
+        users.push(user);
+        localStorage.setItem("users", JSON.stringify(users));
+    }
+
+
+    function registerUser(event: Event) {
+        event.preventDefault();
+        const email = (document.getElementById("email") as HTMLInputElement).value;
+        const username = (document.getElementById("username") as HTMLInputElement).value;
+        const password = (document.getElementById("password") as HTMLInputElement).value;
+        const confirmPassword = (document.getElementById("confirm-password") as HTMLInputElement).value;
+        const role = "cliente"; // Rol por defecto
+
+        // Validación de contraseña: Mínimo 1 mayúscula, 1 carácter especial y al menos 8 caracteres
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-zA-Z0-9]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+            alert("La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula y un carácter especial.");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Las contraseñas no coinciden.");
+            return;
+        }
+
+        const users = getUsers();
+
+        // Validación: Comprobar si el correo ya está registrado
+        const emailExists = users.some(user => user.email === email);
+        if (emailExists) {
+            alert("El correo ya está registrado.");
+            return;
+        }
+
+        // Validación: Comprobar si el username ya está registrado
+        const usernameExists = users.some(user => user.username === username);
+        if (usernameExists) {
+            alert("El nombre de usuario ya está en uso.");
+            return;
+        }
+
+        // Crear y guardar el nuevo usuario
+        const newUser = { email, username, password, role };
+        saveUser(newUser);
+        alert("Usuario registrado exitosamente. Ahora puedes iniciar sesión.");
+        window.location.href = "/login";
+    }
+</script>
+
+<Layout title="Registro">
+    <section>
+        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+                <img src="/src/images/logo_ofc.png" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+                <span class="self-center text-xl font-bold whitespace-nowrap dark:text-white">Coin Capital</span>
+            </a>
+            <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                        Crear una cuenta
+                    </h1>
+                    <form id="register-form" class="space-y-4 md:space-y-6" action=Register>
+                        <div>
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo electronico</label>
+                            <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="coincapital@gmail.com" required="">
+                        </div>
+                        <div>
+                            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de usuario</label>
+                            <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alberto Jimenez" required="">
+                        </div>
+                        <div>
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
+                            <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                        </div>
+                        <div>
+                            <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirme su contraseña</label>
+                            <input type="password" name="confirm-password" id="confirm-password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                            <p class="pt-3 text-sm font-light text-gray-300 dark:text-gray-300">* Minimo 1 mayuscula</p>
+                            <p class="text-sm font-light text-gray-300 dark:text-gray-300">* Minimo 1 caracter especial</p>
+                            <p class="text-sm font-light text-gray-300 dark:text-gray-300">* Minimo 8 caracter de largo</p>
+                        </div>
+
+                        <Recaptcha />
+
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                              <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="">
+                            </div>
+                            <div class="ml-3 text-sm">
+                              <label for="terms" class="font-light text-gray-500 dark:text-gray-300">Acepta los <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Términos y condiciones</a></label>
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Crear cuenta</button>
+                        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                           ¿Ya tienes una cuenta? <a href="/login" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Iniciar sesión aquí</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </section>
+</Layout>
